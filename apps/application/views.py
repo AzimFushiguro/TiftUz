@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
+
 from .serializer import ApplicationCreateSerializer,ApplicationDetailSerializer
 from rest_framework.generics import CreateAPIView,ListAPIView
 from .models import Application
@@ -16,3 +18,9 @@ class ApplicationStatusesListApiView(ListAPIView):
     def get_queryset(self):
         qs =super().get_queryset()
         return qs.filter(user=self.request.user)
+
+class StudentApplicationTemplateView(TemplateView):
+    template_name = "application.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        application_id =

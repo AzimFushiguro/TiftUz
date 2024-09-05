@@ -16,7 +16,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from apps.telegrambot.views import message_handler
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -31,16 +30,15 @@ schema_view = get_schema_view(
         license=openapi.License(name="BSD License"),
     ),
     public=True,
-    permission_classes=(permissions.AllowAny,)
+    permission_classes=(permissions.AllowAny,),
 )
 
 urlpatterns = [
-    path('webhook/', message_handler),
     path('admin/', admin.site.urls),
-    path("api/", include("apps.common.urls")),
-    path("api/", include("apps.news.urls")),
-    path("api/", include("apps.education.urls")),
-    path("api/", include("apps.application.urls"))
+    path("api/v1/", include("apps.common.urls")),
+    path("api/v1/", include("apps.news.urls")),
+    path("api/v1/", include("apps.education.urls")),
+    path("api/v1/", include("apps.application.urls"))
 ]
 urlpatterns += [
     path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),

@@ -38,14 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.application',
+    'drf_yasg',
     'apps.common',
     'apps.education',
     'apps.news',
-    'apps.telegrambot',
     'apps.users',
     'ckeditor',
     'rest_framework',
-    'drf_yasg'
+
+
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,4 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 3
 }
+HOST_NAME = "http://127.0.0.1:8000/"
