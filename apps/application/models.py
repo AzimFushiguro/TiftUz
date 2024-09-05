@@ -35,16 +35,8 @@ class Application(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
-    def save(self, *args, **kwargs):
-        from weasyprint import HTML
-        from django.conf import settings
-        import os
-        if (self.status == ApplicationChoices.ACCEPTED or self.status == ApplicationChoices.REJECTED) and not self.accepted_at:
-            if self.status == ApplicationChoices.ACCEPTED:
-                if not os.path.exists("contracts"):
-                    os.makedirs("contrast")
-                file_name = f"contracts/{self.first_name}-{self.last_name}.pdf"
-                HTML(f"{settings.HOST_NAME}{reverse('application-generator')}?application_id={self.pk}").write_pdf(file_name)
-                self.contract_url = file_name
+    def save(self, *args,**kwargs):
+        if(self.status == ApplicationChoices.ACCEPTED or self.status == ApplicationChoices.REJECTED) and not self.accepted_at:
             self.accepted_at = datetime.now()
-        return  super().save(*args, **kwargs)
+        return super().save(*args,*kwargs)
+        

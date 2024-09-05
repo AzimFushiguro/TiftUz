@@ -19,8 +19,8 @@ class ApplicationStatusesListApiView(ListAPIView):
         qs =super().get_queryset()
         return qs.filter(user=self.request.user)
 
-class StudentApplicationTemplateView(TemplateView):
-    template_name = "application.html"
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        application_id =
+# class StudentApplicationTemplateView(TemplateView):
+#     template_name = "application.html"
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         application_id =
