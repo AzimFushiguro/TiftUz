@@ -19,6 +19,7 @@ from django.urls import path, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from apps.application.views import StudentApplicationTemplateview
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -35,6 +36,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('student-application/', StudentApplicationTemplateview.as_view(), name="application-generator"),
     path("api/v1/", include("apps.common.urls")),
     path("api/v1/", include("apps.news.urls")),
     path("api/v1/", include("apps.education.urls")),
