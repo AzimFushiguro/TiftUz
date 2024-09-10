@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,10 +19,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-lv5p@$^v9n*0p8_00$zin$^8=_*t_yoawb)%dhn206jxm2nk5a'
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG =bool( int(config("DEBUG", default = False )))
 
 ALLOWED_HOSTS = ['*']
 
@@ -132,4 +132,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 3
 }
-HOST_NAME = "http://127.0.0.1:8000"
+HOST_NAME = config("HOST_NAME")
+CONTRACT_URL = "contracts"
+CONTRACT_ROOT = BASE_DIR / "contracts"
